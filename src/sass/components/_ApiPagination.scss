@@ -1,0 +1,132 @@
+@use "sass:math";
+@use "sass:color";
+@use "../core/_Variables" as *;
+
+.api-pagination {
+  text-align: center;
+
+  .item-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $padding-base;
+
+    .card {
+
+      height: 25vh;
+      margin: $padding-base;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      padding: $padding-base;
+      width: 180px;
+      text-align: center;
+      background-color: $secondary-color;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-image {
+        object-fit: cover;
+        height: 18vh;
+        max-width: 90%;
+        border-radius: $border-radius;
+        transition: transform 0.4s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .card-title {
+        font-size: $font-size-base;
+        font-weight: bold;
+        color: $text-color;
+        transition: color 0.3s ease;
+      }
+    }
+  }
+
+  .pagination {
+    margin: 16px 0;
+
+    span {
+      font-size: $font-size-extra-large;
+    }
+
+    button {
+      margin: 0 $padding-base;
+      padding: $padding-large math.div($padding-large, 1.5);
+      font-size: $font-size-large;
+      border: none;
+      border-radius: $border-radius;
+      background-color: $primary-color;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s ease;
+
+      &:disabled {
+        background-color: color.adjust($primary-color, $lightness: -20%);
+        cursor: not-allowed;
+      }
+
+      &:hover {
+        background-color: color.adjust($primary-color, $lightness: 10%);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+
+    .page-info {
+      font-size: $font-size-large;
+      color: color.adjust($text-color, $lightness: -20%);
+      margin-top: $padding-base;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .api-pagination {
+    .item-list {
+      .card {
+        width: 150px;
+        padding: math.div($padding-base, 2);
+      }
+    }
+
+    .pagination {
+      button {
+        padding: math.div($padding-base, 2) $padding-large;
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .api-pagination {
+    .item-list {
+      flex-direction: column;
+      align-items: center;
+
+      .card {
+        width: 100%;
+        padding: $padding-base;
+        margin: math.div($padding-base, 2) 0;
+      }
+    }
+
+    .pagination {
+      button {
+        padding: $padding-base math.div($padding-large, 1.5);
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
