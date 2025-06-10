@@ -6,11 +6,11 @@ import EpisodesSearch from '../components/EpisodesSearch';
 const Enemies = () => {
 
   return(
-    <LayoutPublic>
+    <main>
       <h1>Episodes</h1>
       <EpisodesSearch></EpisodesSearch>
 
-    </LayoutPublic>
+    </main>
 
 
   );

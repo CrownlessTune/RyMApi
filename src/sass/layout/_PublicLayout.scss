@@ -1,52 +1,35 @@
-@use "sass:math";
-@use "../core/_Variables" as variables; // Asegúrate de que la ruta sea correcta
-
 .public-layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; // Ocupa toda la altura del viewport
-  width: 100%; // Ocupa todo el ancho
-  overflow-x: hidden; // Previene el desplazamiento horizontal no deseado
-  box-sizing: border-box; // Incluye padding y border en el cálculo del ancho y alto
-
-  .navbar,
-  .footer {
-    height: variables.$nav-footer-height; // Altura definida en las variables
-    width: 100%; // Asegura que ocupen todo el ancho del layout
-  }
-
-  main {
-    flex: 1; // Permite que el contenido crezca para llenar el espacio restante
-    padding: variables.$layout-padding; // Espaciado adaptable según variables
-    width: 100%; // Evita contenido fuera del layout
-    max-width: 100%; // Previene el desbordamiento
-    height: calc(100vh - variables.$nav-footer-height * 2); // Ajusta para excluir navbar y footer
-    text-align: center; // Centra el contenido en dispositivos más pequeños
-    overflow-y: auto; // Permite scroll vertical si el contenido es mayor
-  }
+  display: grid;
+  grid-template-columns: 15% 1fr;
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
+  width: 100%;
+  gap: 0;
 }
 
-// Media Queries para diseño adaptable
-@media (max-width: 1024px) {
-  .public-layout {
-    main {
-      padding: math.div(variables.$layout-padding, 1.5); // Reduce el padding en tablets
-    }
-  }
+.public-layout .navbar {
+  grid-column: 1;
+  grid-row: 1 / span 2; 
+  max-width: 240px;
+  min-width: 180px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
 }
 
-@media (max-width: 768px) {
-  .public-layout {
-    main {
-      padding: math.div(variables.$layout-padding, 2); // Reduce aún más el padding en móviles grandes
-    }
-  }
+.public-layout main {
+  grid-column: 2;
+  grid-row: 1;
+  padding: 2rem;
+  overflow-x: hidden;
 }
 
-@media (max-width: 480px) {
-  .public-layout {
-    main {
-      padding: math.div(variables.$layout-padding, 3); // Reduce al mínimo el padding en móviles pequeños
-    }
-  }
+.public-layout .footer {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 1rem 2rem;
+  background-color: #eee;
+  max-width: 900px; /* o el ancho que quieras */
+  margin: 0 auto;
+  box-sizing: border-box;
 }

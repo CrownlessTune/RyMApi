@@ -1,32 +1,104 @@
-.auth-title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
+.auth-container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  padding: 3rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  flex-wrap: nowrap; /* para forzar lado a lado sin que se rompan */
+}
+
+.auth-section {
+  background: var(--bg-section);
+  border-radius: 12px;
+  box-shadow: var(--shadow-section);
+  padding: 2rem 3rem;
+  width: 380px;
+  color: var(--text-primary);
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid var(--accent-color); /* borde visible para que se note la caja */
+
+  &:hover {
+    background: var(--bg-section-hover);
+    box-shadow: var(--shadow-section-hover);
   }
-  
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    width: 50px;
+    height: 8px;
+    background: var(--accent-color);
+    border-radius: 4px;
+    box-shadow: 0 0 15px var(--accent-color);
+  }
+}
+
+.auth-subtitle {
+  font-size: 1.9rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+  text-shadow: var(--text-shadow);
+}
+
+.auth-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.auth-section input {
+  font-size: 1.1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px; /* más redondeado para mejor visual */
+  border: 2px solid var(--accent-color); /* borde visible para inputs */
+  outline: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  background: var(--input-bg);
+  color: var(--input-text);
+  box-shadow: var(--input-shadow);
+}
+
+.auth-section input:focus {
+  background: var(--input-bg-focus);
+  box-shadow: var(--input-shadow-focus);
+  border-color: var(--btn-bg-hover);
+}
+
+.auth-section button {
+  font-size: 1.1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--btn-shadow);
+}
+
+.auth-section button:hover {
+  background: var(--btn-bg-hover);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+@media (max-width: 900px) {
   .auth-container {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    flex-wrap: wrap; /* aquí ya permiten que baje a columna */
+    justify-content: center;
   }
-  
   .auth-section {
-    flex: 1;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  
-    .auth-subtitle {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-  
-    form {
-      width: 100%;
-    }
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 2rem;
   }
-  
+}

@@ -5,9 +5,9 @@ const UserProfile = React.lazy(() => import('../components/UserProfile'));
 
 const User = () => {
   return (
-    <PrivateLayout>
-        <UserProfile></UserProfile>
-    </PrivateLayout>
+    <main aria-labelledby="user-profile-heading">
+      <UserProfile />
+    </main>
   );
 };
 

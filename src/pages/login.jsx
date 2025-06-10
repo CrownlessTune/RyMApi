@@ -14,7 +14,7 @@ const Login = () => {
   };
 
   return (
-    <PublicLayout>
+    <main>
       <div className="auth-container">
         <div className="auth-section">
           <h1 className="auth-subtitle">Register</h1>
@@ -25,7 +25,7 @@ const Login = () => {
           <LoginForm submitLogin={handleLogin} />
         </div>
       </div>
-    </PublicLayout>
+    </main>
   );
 };
 

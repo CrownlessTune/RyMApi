@@ -1,22 +1,13 @@
-import React, { useState } from 'react';
-import LayoutPublic from '../layout/PublicLayout';
+import React from 'react';
 import LocationSearch from '../components/LocationSearch';
 
-
 const Regions = () => {
-
-  return(
-    <LayoutPublic>
+  return (
+    <main>
       <h1>Regions</h1>
-      <LocationSearch></LocationSearch>
-
-    </LayoutPublic>
-
-
+      <LocationSearch />
+    </main>
   );
-
-
 }
-
 
 export default Regions;

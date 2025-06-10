@@ -5,10 +5,12 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../sass/components/_LoginForm.scss"; // Importa el archivo SCSS
+import { useAuth } from "../context/AuthContext"; // <-- importa tu contexto
+import "../sass/components/_LoginForm.scss";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const { login } = useAuth(); // <-- extraemos la función login del contexto
 
   const initialValues = {
     email: "",
@@ -29,12 +31,20 @@ const LoginForm = () => {
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      // Guardamos el usuario en el contexto para mantener sesión
+      login({
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        // puedes añadir otros datos que quieras guardar
+      });
+
       Swal.fire({
         title: "Success",
         text: "Login successful.",
         icon: "success",
       });
-      console.log("Logged in user:", userCredential.user);
+
       resetForm();
       navigate("/user"); // Redirige a la página de usuario
     } catch (error) {
@@ -63,11 +73,7 @@ const LoginForm = () => {
               placeholder="Enter your email"
               className="input-field"
             />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="error-message"
-            />
+            <ErrorMessage name="email" component="div" className="error-message" />
           </div>
           <div className="form-group">
             <Field
@@ -76,11 +82,7 @@ const LoginForm = () => {
               placeholder="Enter your password"
               className="input-field"
             />
-            <ErrorMessage
-              name="password"
-              component="div"
-              className="error-message"
-            />
+            <ErrorMessage name="password" component="div" className="error-message" />
           </div>
           <button
             type="submit"

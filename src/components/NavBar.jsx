@@ -1,35 +1,50 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; 
 import { Link } from 'react-router-dom';
 import '../sass/components/_NavBar.scss';
 import '../sass/themes/theme.scss';
-import Icon from '../assets/img/Paimon_Icon.png';
-import ThemeIcon from '../assets/img/Theme_Icon.png';
+import Icon from '../assets/img/Rick_Icon.png';
+
+const PencilIcon = ({ fill }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    fill={fill} 
+    viewBox="0 0 24 24" 
+    width="24" 
+    height="24" 
+    aria-hidden="true"
+  >
+    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"/>
+  </svg>
+);
 
 const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState('Celestia');
+  const [currentTheme, setCurrentTheme] = useState('Morty'); // Morty = claro, Rick = oscuro
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const themeRef = useRef(null);
 
-  const themes = ['Celestia', 'Hydro', 'Dendro', 'Pyro', 'Cryo', 'Anemo', 'Geo', 'Abyss'];
+  const themes = {
+    Rick: 'Rick',     // oscuro
+    Morty: 'Morty',   // claro
+  };
 
+  // Cambia el tema aplicando la clase al body
   const handleThemeChange = (themeName) => {
     setCurrentTheme(themeName);
-    document.body.classList.remove(...themes); // Elimina todas las clases anteriores
-    document.body.classList.add(themeName); // Añade la nueva clase del tema
-    localStorage.setItem('theme', themeName); // Guarda el tema en el localStorage
+    document.body.classList.remove(...Object.values(themes));
+    document.body.classList.add(themeName);
+    localStorage.setItem('theme', themeName);
   };
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
-    const initialTheme = storedTheme || 'Celestia'; // Si no hay tema guardado, se usa 'Celestia'
-    setCurrentTheme(initialTheme);
-    document.body.classList.add(initialTheme); // Aplica el tema al cargar
+    const initialTheme = storedTheme || themes.Morty;
+    handleThemeChange(initialTheme);
   }, []);
 
-  // Cierra los menús al hacer clic fuera de ellos
+  // Cierra los menús al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -43,6 +58,16 @@ const NavBar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Cambia el tema alternando entre Rick y Morty
+  const toggleTheme = () => {
+    const newTheme = currentTheme === themes.Rick ? themes.Morty : themes.Rick;
+    handleThemeChange(newTheme);
+    setIsThemeMenuOpen(false);
+  };
+
+  // Color del lápiz según tema para que se vea bien (blanco en oscuro, negro en claro)
+  const pencilColor = currentTheme === themes.Rick ? '#fff' : '#000';
+
   return (
     <header className="navbar" role="banner">
       <h1 className="navbar-logo">
@@ -54,9 +79,9 @@ const NavBar = () => {
       <nav className="navbar-menu" ref={menuRef} aria-label="Main menu">
         <button
           className="navbar-menu-trigger"
-          aria-expanded={isMenuOpen ? 'true' : 'false'}
+          aria-expanded={isMenuOpen}
           aria-controls="menu-list"
-          onClick={() => setIsMenuOpen((prev) => !prev)} // Abre o cierra el menú al hacer clic
+          onClick={() => setIsMenuOpen((prev) => !prev)}
         >
           Menu
         </button>
@@ -69,16 +94,6 @@ const NavBar = () => {
           </ul>
         )}
       </nav>
-
-      <section className="navbar-search" aria-labelledby="search-label">
-        <label id="search-label" htmlFor="search-input"></label>
-        <input
-          id="search-input"
-          type="text"
-          placeholder="Search..."
-          aria-label="Search for content"
-        />
-      </section>
 
       <section className="navbar-auth">
         {isLoggedIn ? (
@@ -96,26 +111,12 @@ const NavBar = () => {
       <section className="navbar-theme" ref={themeRef}>
         <button
           className="theme-button"
-          aria-label="Change theme"
-          onClick={() => setIsThemeMenuOpen((prev) => !prev)} // Abre o cierra el menú de temas
+          aria-label={`Switch theme. Current: ${currentTheme}`}
+          title={`Switch theme. Current: ${currentTheme}`}
+          onClick={toggleTheme}
         >
-          <img src={ThemeIcon} alt="Change theme" />
+          <PencilIcon fill={pencilColor} />
         </button>
-        {isThemeMenuOpen && (
-          <ul className="theme-dropdown" role="menu">
-            {themes.map((themeName) => (
-              <li key={themeName}>
-                <button
-                  className={`theme-option ${currentTheme === themeName ? 'active' : ''}`}
-                  onClick={() => handleThemeChange(themeName)}
-                  role="menuitem"
-                >
-                  {themeName}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
       </section>
     </header>
   );

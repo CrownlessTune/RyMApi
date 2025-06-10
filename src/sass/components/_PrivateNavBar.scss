@@ -1,187 +1,174 @@
-.navbar {
+.private-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: var(--color-button-bg);
+  color: var(--color-text);
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  padding: 8px;
-  border-bottom: 1px solid #191919;
+  flex-direction: column;
   align-items: center;
-  position: relative;
-  font-size: 18px;
+  padding: 1.5rem 1rem;
+  border-right: 2px solid var(--color-button-border);
+  z-index: 1000;
+  font-family: 'Pretendard', sans-serif;
+  transition: all 0.3s ease;
 
-  &-home,
-  &-menu,
-  &-search,
-  &-auth,
-  &-theme,
-  &-user {
+  &-logo {
+    margin-bottom: 2rem;
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 0 8px;
-  }
 
-  &-home a {
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #191919;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &-home img {
-    object-fit: cover;
-    min-width: 30px;
-    max-width: 50px;
+    img {
+      max-width: 100%;
+      width: 164px;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+    }
   }
 
   &-menu {
-    position: relative;
+    width: 100%;
 
     &-trigger {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: transparent;
+      border: none;
+      color: var(--color-text);
+      font-size: 1rem;
+      text-align: left;
       cursor: pointer;
-      font-size: 24px;
-      font-weight: bold;
+
+      &:hover {
+        background-color: var(--color-button-hover-bg);
+        color: var(--color-button-hover-text);
+      }
     }
 
     &-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #fff;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      border: 1px solid #191919;
-      border-radius: 5px;
-      padding: 12px;
-      min-width: 12vh;
-      max-width: 250px;
-      z-index: 2000;
-      margin-top: 2.3vh;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
 
-      ul {
+      li {
         list-style: none;
-        margin: 0;
-        padding: 0;
 
-        li {
-          padding: 8px 0;
+        a {
+          display: block;
+          padding: 0.5rem 1rem;
+          color: var(--color-link);
+          text-decoration: none;
+          border-radius: 0.4rem;
+          transition: background-color 0.3s ease;
 
-          a {
-            text-decoration: none;
-            color: #191919;
+          &:hover {
+            background-color: var(--color-button-hover-bg);
+            color: var(--color-button-hover-text);
           }
         }
       }
     }
   }
 
-  &-user {
-    position: relative;
+  &-auth {
+    margin-top: auto;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
 
-    &-trigger {
-      font-size: 16px;
-      font-weight: bold;
+    a,
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: var(--color-background);
+      color: var(--color-text);
+      border: 1px solid var(--color-button-border);
+      border-radius: 0.4rem;
+      text-align: center;
+      text-decoration: none;
       cursor: pointer;
-      padding: 10px;
-      color: #191919;
-    }
+      transition: all 0.3s ease;
 
-    &-dropdown {
-      position: absolute;
-      top: 100%;
-      left: -10px;  /* Mueve el desplegable hacia la izquierda */
-      background-color: #fff;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      border: 1px solid #191919;
-      border-radius: 5px;
-      padding: 12px;
-      min-width: 12vh;
-      max-width: 250px;
-      z-index: 2000;
-      margin-top: 2.3vh;
-
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-
-        li {
-          padding: 8px 0;
-
-          a,
-          div {
-            text-decoration: none;
-            color: #191919;
-            cursor: pointer;
-          }
-
-          div:hover {
-            background-color: #ddd;
-          }
-        }
+      &:hover {
+        background-color: var(--color-button-hover-bg);
+        color: var(--color-button-hover-text);
       }
     }
   }
 
   &-theme {
-    position: relative;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-bottom: 1rem;
 
-    button {
-      min-width: 30px;
-      max-width: 50px;
+    .theme-button {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 26px;
-      font-weight: bold;
-      color: #007bff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
+      padding: 0.5rem;
+
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .private-navbar {
+    flex-direction: row;
+    width: 100%;
+    height: 70px;
+    padding: 0 1rem;
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    border-right: none;
+    border-bottom: 2px solid var(--color-button-border);
+
+    &-logo {
+      margin-bottom: 0;
+      justify-content: flex-start;
 
       img {
-        min-width: 30px;
-        max-width: 60px;
+        width: 48px;
       }
     }
 
-    .theme-dropdown {
-      position: absolute;
-      top: 100%;
-      background-color: #fff;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      border: 1px solid #191919;
-      border-radius: 5px;
-      padding: 8px;
-      min-width: 12vh;
-      max-width: 400px;
-      z-index: 2000;
-      margin-top: 1.2vh;
+    &-menu {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      .theme-option {
-        padding: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        min-width: 12vh;
-        border: none;
-        background: none;
-        text-align: left;
+      &-dropdown {
+        position: absolute;
+        top: 70px;
+        left: 0;
         width: 100%;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: #ddd;
-        }
-
-        &.active {
-          font-weight: bold;
-          color: #007bff;
-        }
+        background-color: var(--color-button-bg);
+        border-top: 1px solid var(--color-button-border);
+        padding: 1rem 0;
+        z-index: 999;
       }
+    }
+
+    &-auth {
+      margin: 0;
+      flex-direction: row;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    &-theme {
+      margin: 0;
     }
   }
 }

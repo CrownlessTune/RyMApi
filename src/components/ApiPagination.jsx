@@ -4,46 +4,38 @@ import PaimonConfuse from '../assets/img/Paimon_Confuse.png'
 import '../sass/components/_ApiPagination.scss'
 
 const ApiPagination = () => {
-  const [data, setData] = useState({
-    characters: [],
-    locations: [],
-    episodes: [],
-  })
+  const [characters, setCharacters] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
+  const [visitedPages, setVisitedPages] = useState(new Set())
   const itemsPerPage = 5
   const [imageUrls, setImageUrls] = useState({})
   const fallbackImage = PaimonConfuse
 
-  const fetchData = async () => {
+  const fetchAllCharacters = async () => {
     try {
       setLoading(true)
-      const [charactersRes, locationsRes, episodesRes] = await Promise.all([
-        axios.get('https://rickandmortyapi.com/api/character'),
-        axios.get('https://rickandmortyapi.com/api/location'),
-        axios.get('https://rickandmortyapi.com/api/episode'),
-      ])
+      const firstPage = await axios.get('https://rickandmortyapi.com/api/character')
+      const totalPages = firstPage.data.info.pages
+      const allRequests = []
 
-      setData({
-        characters: charactersRes.data.results.map((char) => ({
+      for (let i = 1; i <= totalPages; i++) {
+        allRequests.push(axios.get(`https://rickandmortyapi.com/api/character?page=${i}`))
+      }
+
+      const responses = await Promise.all(allRequests)
+      const allChars = responses.flatMap((res) =>
+        res.data.results.map((char) => ({
           id: `char-${char.id}`,
           name: char.name,
           portrait: char.image,
-        })),
-        locations: locationsRes.data.results.map((loc) => ({
-          id: `loc-${loc.id}`,
-          name: loc.name,
-          portrait: null, // no image provided
-        })),
-        episodes: episodesRes.data.results.map((ep) => ({
-          id: `ep-${ep.id}`,
-          name: `${ep.episode} - ${ep.name}`,
-          portrait: null, // no image provided
-        })),
-      })
+        }))
+      )
+
+      setCharacters(allChars)
     } catch (err) {
-      setError(`Error fetching data: ${err.message}`)
+      setError(`Error fetching characters: ${err.message}`)
     } finally {
       setLoading(false)
     }
@@ -62,23 +54,46 @@ const ApiPagination = () => {
   }
 
   useEffect(() => {
-    fetchData()
+    fetchAllCharacters()
   }, [])
 
-  const allItems = [...data.characters, ...data.locations, ...data.episodes]
+  useEffect(() => {
+    setVisitedPages((prev) => new Set(prev).add(currentPage))
+  }, [currentPage])
+
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = allItems.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = characters.slice(indexOfFirstItem, indexOfLastItem)
 
   const isFirstPage = currentPage === 1
-  const isLastPage = currentPage * itemsPerPage >= allItems.length
+  const isLastPage = indexOfLastItem >= characters.length
+  const totalPages = Math.ceil(characters.length / itemsPerPage)
+
+const getPageNumbers = () => {
+  const totalPages = Math.ceil(characters.length / itemsPerPage)
+  const pages = new Set()
+
+  pages.add(1)
+
+  for (let i = currentPage - 3; i <= currentPage + 3; i++) {
+    if (i > 1 && i < totalPages) {
+      pages.add(i)
+    }
+  }
+
+  if (totalPages > 1) {
+    pages.add(totalPages)
+  }
+
+  return Array.from(pages).sort((a, b) => a - b)
+}
+
 
   if (loading) return <div className="loading">Loading...</div>
   if (error) return <div className="error">{error}</div>
 
   return (
     <main className="api-pagination">
-      <header></header>
       <section className="item-list">
         {currentItems.map((item) => (
           <article className="card" key={item.id}>
@@ -93,11 +108,19 @@ const ApiPagination = () => {
       </section>
       <nav className="pagination">
         <button onClick={() => setCurrentPage((prev) => prev - 1)} disabled={isFirstPage}>
-          Previous
+          Prev
         </button>
-        <span>
-          Page {currentPage} of {Math.ceil(allItems.length / itemsPerPage)}
-        </span>
+
+        {getPageNumbers().map((page) => (
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={`${page === currentPage ? 'active' : ''} ${visitedPages.has(page) ? 'visited' : ''}`}
+          >
+            {page}
+          </button>
+        ))}
+
         <button onClick={() => setCurrentPage((prev) => prev + 1)} disabled={isLastPage}>
           Next
         </button>

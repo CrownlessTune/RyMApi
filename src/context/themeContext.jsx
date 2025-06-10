@@ -1,15 +1,35 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
-// Crear el contexto del tema
 const ThemeContext = createContext();
 
-// Proveedor de contexto de tema
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('Celestia');
+const themes = {
+  Rick: 'Rick',   // modo oscuro
+  Morty: 'Morty', // modo claro
+};
 
-  const toggleTheme = (newTheme) => {
-    setTheme(newTheme);
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState(themes.Morty);
+
+  const applyTheme = (themeName) => {
+    document.body.classList.remove(...Object.values(themes));
+    document.body.classList.add(themeName);
   };
+
+  const toggleTheme = () => {
+    const newTheme = theme === themes.Rick ? themes.Morty : themes.Rick;
+    setTheme(newTheme);
+    applyTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    const initialTheme = storedTheme && Object.values(themes).includes(storedTheme)
+      ? storedTheme
+      : themes.Morty;
+    setTheme(initialTheme);
+    applyTheme(initialTheme);
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -18,5 +38,4 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-// Hook para acceder al contexto de tema
 export const useTheme = () => useContext(ThemeContext);

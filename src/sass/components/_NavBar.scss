@@ -1,275 +1,177 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: var(--color-button-bg);
+  color: var(--color-text);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  padding: 1.5rem 1rem;
+  border-right: 2px solid var(--color-button-border);
+  z-index: 1000;
+  font-family: 'Pretendard', sans-serif;
+  transition: all 0.3s ease;
+
+&-logo {
+  margin-bottom: 2rem;
   width: 100%;
-  padding: 16px;
-  border-bottom: 1px solid;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
 
-  &-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      margin-right: 10px;
-
-      &:hover {
-        transform: scale(1.2);
-        transition: transform 0.3s ease, filter 0.3s ease;
-        filter: brightness(1.2);
-      }
-    }
-
+  img {
+    max-width: 100%;
+    width: 164px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
   }
+}
+
 
   &-menu {
-    position: relative;
+    width: 100%;
 
     &-trigger {
-      background: none;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: transparent;
       border: none;
-      font-size: 18px;
-      font-weight: bold;
+      color: var(--color-text);
+      font-size: 1rem;
+      text-align: left;
       cursor: pointer;
-      transition: transform 0.2s ease, color 0.2s ease;
 
       &:hover {
-        color: #0056b3;
-        transform: scale(1.1);
-      }
-
-      &:active {
-        transform: scale(0.95);
+        background-color: var(--color-button-hover-bg);
+        color: var(--color-button-hover-text);
       }
     }
 
     &-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #fff;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-      border: 1px solid;
-      border-radius: 5px;
-      padding: 8px 0;
-      z-index: 1000;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
 
       li {
-        list-style: none; /* Elimina el punto de la lista */
-        padding: 10px 20px;
+        list-style: none;
 
         a {
+          display: block;
+          padding: 0.5rem 1rem;
+          color: var(--color-link);
           text-decoration: none;
-          color: #191919;
-          font-size: 16px;
-          transition: color 0.3s ease, transform 0.2s ease;
+          border-radius: 0.4rem;
+          transition: background-color 0.3s ease;
 
           &:hover {
-            color: #007bff;
-            transform: scale(1.1);
-          }
-
-          &:active {
-            transform: scale(0.95);
+            background-color: var(--color-button-hover-bg);
+            color: var(--color-button-hover-text);
           }
         }
-      }
-    }
-  }
-
-  &-search {
-    flex-grow: 1;
-    padding: 0 16px;
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #e0e0e0;
-      border-radius: 5px;
-      font-size: 14px;
-
-      &:focus {
-        border-color: #007bff;
-        outline: none;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
       }
     }
   }
 
   &-auth {
+    margin-top: auto;
+    margin-bottom: 1rem;
     display: flex;
-    align-items: center;
-    gap: 16px;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
 
-    a {
-      color: #007bff;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 16px;
-      transition: color 0.3s ease, transform 0.2s ease;
-
-      &:hover {
-        color: #0056b3;
-        transform: scale(1.1);
-      }
-
-      &:active {
-        transform: scale(0.95);
-      }
-    }
-
+    a,
     button {
-      padding: 8px 16px;
-      background-color: #007bff;
-      color: #fff;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: var(--color-background);
+      color: var(--color-text);
+      border: 1px solid var(--color-button-border);
+      border-radius: 0.4rem;
+      text-align: center;
+      text-decoration: none;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      transition: all 0.3s ease;
 
       &:hover {
-        background-color: #0056b3;
-        transform: scale(1.1);
-      }
-
-      &:active {
-        background-color: #003d7a;
-        transform: scale(0.95);
+        background-color: var(--color-button-hover-bg);
+        color: var(--color-button-hover-text);
       }
     }
   }
 
   &-theme {
-    position: relative;
+    margin-bottom: 1rem;
 
-    button {
+    .theme-button {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 24px;
-      color: #007bff;
-      transition: color 0.3s ease, transform 0.2s ease;
+      padding: 0.5rem;
 
-      &:hover {
-        color: #0056b3;
-        transform: rotate(15deg);
+      svg {
+        width: 28px;
+        height: 28px;
       }
-
-      &:active {
-        transform: rotate(-15deg) scale(0.9);
-      }
-    }
-
-    .theme-dropdown {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: #fff;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-      border: 1px solid #e0e0e0;
-      border-radius: 5px;
-      padding: 8px 0;
-      z-index: 1000;
-    
-      li {
-        list-style: none; /* Elimina el punto de la lista */
-        padding: 10px 20px;
-    
-        .theme-option {
-          background: none;
-          border: none;
-          color: #333;
-          font-size: 16px;
-          text-align: left;
-          cursor: pointer;
-          width: 100%;
-          border-radius: 10%;
-          transition: background-color 0.3s ease, color 0.3s ease;
-    
-          &:hover {
-            background-color: #f0f0f0;
-            color: #007bff;
-            border-radius: 10%;
-            animation: wobble 0.6s ease-in infinite; 
-          }
-    
-          &.active {
-            background-color: #007bff;
-            color: #fff;
-            font-weight: bold;
-          }
-        }
-      }
-    }
-    
-    /* Definición de la animación de tambaleo */
-    @keyframes wobble {
-      0% {
-        transform: rotate(0deg);
-      }
-      15% {
-        transform: rotate(-4deg);
-      }
-      30% {
-        transform: rotate(4deg);
-      }
-      45% {
-        transform: rotate(-3deg);
-      }
-      60% {
-        transform: rotate(2deg);
-      }
-      75% {
-        transform: rotate(-1deg);
-      }
-      100% {
-        transform: rotate(1deg);
-      }
-    }
-    
-  }
-
-
-  
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    padding: 12px;
-    gap: 10px;
-
-    &-menu {
-      width: 100%;
-
-      &-trigger {
-        font-size: 20px;
-      }
-
-      &-dropdown {
-        width: 100%;
-      }
-    }
-
-    &-search {
-      width: 100%;
-    }
-
-    &-auth {
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    &-theme {
-      width: 100%;
-      justify-content: center;
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    width: 100%;
+    height: 70px;
+    padding: 0 1rem;
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    border-right: none;
+    border-bottom: 2px solid var(--color-button-border);
+
+    &-logo {
+      margin-bottom: 0;
+      justify-content: flex-start;
+
+      img {
+        width: 48px;
+      }
+    }
+
+    &-menu {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &-dropdown {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-button-bg);
+        border-top: 1px solid var(--color-button-border);
+        padding: 1rem 0;
+        z-index: 999;
+      }
+    }
+
+    &-auth {
+      margin: 0;
+      flex-direction: row;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    &-theme {
+      margin: 0;
+    }
+  }
+}
+
+

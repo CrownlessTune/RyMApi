@@ -1,33 +1,18 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import PrivateNavBar from '../components/PrivateNavBar';
 import Footer from '../components/Footer';
+import '../sass/layout/_PublicLayout.scss';
 
-const PrivateLayout = ({ children, mainStyle, username, onLogout }) => {
+const PrivateLayout = ({ mainStyle, username, onLogout }) => {
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
-      boxSizing: 'border-box',
-      width: '100%',
-      overflowX: 'hidden',
-    }}>
-      <PrivateNavBar username={username} onLogout={onLogout} />
-      <main
-        style={{
-          flex: 1,
-          padding: '20px',
-          textAlign: 'center',
-          overflowY: 'auto',
-          maxWidth: '100%',
-          width: '100%',
-          ...mainStyle,
-        }}
-      >
-        {children}
+    <section className="public-layout">
+      <PrivateNavBar className="navbar" username={username} onLogout={onLogout} />
+      <main style={mainStyle}>
+        <Outlet />
       </main>
-      <Footer />
-    </div>
+      <Footer className="footer" />
+    </section>
   );
 };
 
