@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LayoutPublic from '../layout/PublicLayout';
-import PaimonConfuse from '../assets/img/Lumine_404.png';
+import RyM404 from '../assets/img/404.png';
 import '../sass/pages/_Error.scss';
 
 const Error404 = () => {
   return (
       <div className="error-404">
-        <h1>404</h1>
-        <h2>Paimon says that this page is not found</h2>
-        <img src={PaimonConfuse} alt="Paimon Confused" />
-        <p>Traveler! Did we get lost again?</p>
+        <h1>404 Error</h1>
+        <img src={RyM404} alt="Paimon Confused" />
+        <p>Morty, Creo que este no es el sitio. Burp...</p>
         <Link to="/" className="back-home">Go Back Home</Link>
       </div>
   );
