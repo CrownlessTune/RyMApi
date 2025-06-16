@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import '../sass/components/_EnemiesSearch.scss';
+import '../sass/components/_EpisodesSearch.scss';
 import PaimonConfuse from '../assets/img/Paimon_Confuse.png';
 
 const EpisodesSearch = () => {
@@ -136,7 +136,6 @@ const EpisodesSearch = () => {
       <div
         className="episodes-grid"
         ref={episodesGridRef}
-        style={{ maxHeight: '400px', overflowY: 'auto' }}
       >
         {filteredEpisodes.length === 0 && <div>No episodes found.</div>}
         {filteredEpisodes.map((ep) => (

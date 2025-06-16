@@ -5,12 +5,12 @@
   bottom: 0;
   width: 250px;
   background-color: var(--color-button-bg);
-  color: var(--color-text);
+  color: var(--color-button-border);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1.5rem 1rem;
-  border-right: 2px solid var(--color-button-border);
+  border-right: 2px solid var(--secondary-color-text);
   z-index: 1000;
   font-family: 'Pretendard', sans-serif;
   transition: all 0.3s ease;
@@ -39,7 +39,7 @@
       padding: 0.75rem 1rem;
       background-color: transparent;
       border: none;
-      color: var(--color-text);
+      color: var(--secondary-color-text);
       font-size: 1rem;
       text-align: left;
       cursor: pointer;
@@ -62,7 +62,7 @@
         a {
           display: block;
           padding: 0.5rem 1rem;
-          color: var(--color-link);
+          color: var(--secondary-color-text);
           text-decoration: none;
           border-radius: 0.4rem;
           transition: background-color 0.3s ease;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../sass/components/_CharacterSearch.scss';
+import '../sass/components/_LocationSearch.scss';
 
 const LOCATION_TYPES = [
   '', // opción vacía para "Todos"

@@ -123,15 +123,7 @@ const CharacterSearch = () => {
           </select>
         </label>
       </section>
-      <section
-        className="characters-grid"
-        ref={charactersGridRef}
-        style={{
-          maxHeight: '400px',
-          overflowY: 'auto',
-        }}
-        aria-label="Character results"
-      >
+      <section className="characters-grid" aria-label="Character results">
         <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
           {filteredCharacters.map((character) => (
             <li className="character-card" key={character.id}>
