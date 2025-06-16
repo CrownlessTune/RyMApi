@@ -1,3 +1,6 @@
+@use "../core/_Variables.scss" as *;
+@use "../themes/theme.scss" as *;
+
 .error-404 {
   display: flex;
   flex-direction: column;

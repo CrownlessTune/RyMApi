@@ -1,3 +1,6 @@
+@use "../core/_Variables.scss" as *;
+@use "../themes/theme.scss" as *;
+
 .location-search {
   display: flex;
   flex-direction: column;

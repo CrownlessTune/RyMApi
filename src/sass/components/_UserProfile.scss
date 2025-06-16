@@ -1,3 +1,6 @@
+@use "../core/_Variables.scss" as *;
+@use "../themes/theme.scss" as *;
+
 .user-profile-container {
   padding: 2rem;
   background-color: var(--color-background);

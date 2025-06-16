@@ -1,3 +1,6 @@
+@use "../core/_Variables.scss" as *;
+@use "../themes/theme.scss" as *;
+
 .login-form {
   max-width: 400px;
   margin: 2rem auto;

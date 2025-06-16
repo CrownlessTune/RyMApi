@@ -1,4 +1,5 @@
-
+@use "../core/_Variables.scss" as *;
+@use "../themes/theme.scss" as *;
 
 .character-search-container {
   display: flex;

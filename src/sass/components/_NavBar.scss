@@ -1,3 +1,6 @@
+@use "../core/_Variables.scss" as *;
+@use "../themes/theme.scss" as *;
+
 .navbar {
   position: fixed;
   top: 0;

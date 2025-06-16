@@ -1,3 +1,6 @@
+@use "../core/_Variables.scss" as *;
+@use "../themes/theme.scss" as *;
+
 .theme-switcher {
     display: flex;
     flex-direction: column;
