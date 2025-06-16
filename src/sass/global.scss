@@ -22,18 +22,23 @@
 
 
 html, body, #root {
+
     height: 100%; 
     margin: 0; 
     padding: 0; 
-    font-family: "Archivo Black", serif;
+    font-family: 'Inconsolata', monospace;
   }
   
   p{
 
-    font-family: "Comfortaa", sans-serif;
+  font-family: 'Quantico', sans-serif; /* Por defecto, párrafos */
 
 
   }
+
+  small {
+  font-family: 'Inter', sans-serif;
+}
   
   
   #root {
