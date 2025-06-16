@@ -90,7 +90,6 @@ const NavBar = () => {
             <li><Link to="/regions" role="menuitem">Regions</Link></li>
             <li><Link to="/characters" role="menuitem">Characters</Link></li>
             <li><Link to="/enemies" role="menuitem">Enemies</Link></li>
-            <li><Link to="/community" role="menuitem">Community</Link></li>
           </ul>
         )}
       </nav>
